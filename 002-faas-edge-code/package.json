@@ -1,0 +1,28 @@
+{
+  "devDependencies": {
+    "chai": "^4.3.4",
+    "minify": "^9.1.0",
+    "mocha": "^10.1.0"
+  },
+  "scripts": {
+    "test": "npm run minify && mocha --reporter spec 'test_*.js'",
+    "minify": "minify index.js > index.min.js"
+  },
+  "name": "001-faas-edge-code",
+  "version": "1.0.0",
+  "main": "index.js",
+  "directories": {
+    "test": "."
+  },
+  "author": "OllieJC",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/co-cddo/implement-security.txtt"
+  },
+  "bugs": {
+    "url": "https://github.com/co-cddo/implement-security.txt/issues"
+  },
+  "homepage": "https://github.com/co-cddo/implement-security.txt",
+  "description": ""
+}
