@@ -4,7 +4,7 @@ This repo contains ways to signpost to the central vulnerability reporting servi
 
 The central security.txt file is available here:  
 <https://vulnerability-reporting.service.security.gov.uk/.well-known/security.txt>  
-where it is maintained and generated at: https://github.com/co-cddo/gccc-vrs-iac
+where it is maintained and generated at: [https://github.com/co-cddo/gc3-vuln-reporting-iac](https://github.com/co-cddo/gc3-vuln-reporting-iac)
 
 There are several ways to implement a signpost:
 
@@ -14,4 +14,4 @@ There are several ways to implement a signpost:
 1. [004-dnssecuritytxt](004-dnssecuritytxt): DNS TXT records
 
 If you need any support or have any queries, you can email:
-gccc-vrs-management@cabinetoffice.gov.uk
+vm@gc3.security.gov.uk
