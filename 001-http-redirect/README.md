@@ -8,9 +8,11 @@ The best implementation is to utilise a HTTP redirect to the central security.tx
 ```
 
 See below for various implementation examples:
-- [Node.js Express.js](#nodejs-expressjs)
-- [Node.js 'http'](#nodejs-http)
-- [Python Flask](#python-flask)
+- [001-http-redirect](#001-http-redirect)
+  - [Node.js Express.js](#nodejs-expressjs)
+  - [Node.js 'http'](#nodejs-http)
+  - [Python Flask](#python-flask)
+  - [Azure CDN Terraform](#azure-cdn-terraform)
 
 Additionally, see [002-faas-edge-code](../002-faas-edge-code) for code to implement at your CDN edge to perform the HTTP redirect. 
 
@@ -78,4 +80,34 @@ def securitytxt():
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=int(os.getenv("PORT", "3000")))
+```
+
+## Azure CDN Terraform 
+
+```
+resource "azurerm_cdn_frontdoor_rule" "security_txt_rule" {
+  depends_on = [<DOMAINS/ORIGINS>]
+  name                      = "securitytxtredirect"
+  cdn_frontdoor_rule_set_id = azurerm_cdn_frontdoor_rule_set.<ruleset_name>.id
+  order                     = 1
+  behavior_on_match         = "Continue"
+
+  actions {
+
+    conditions {
+      url_filename_condition {
+        operator         = "BeginsWith"
+        match_values     = ["security.txt", "/.well-known/security.txt"]
+        transforms       = ["Lowercase"]
+    }
+  }
+
+    url_redirect_action {
+      redirect_type        = "Found"
+      redirect_protocol    = "Https"
+      destination_hostname = "vulnerability-reporting.service.security.gov.uk"
+      destination_path     = "/.well-known/security.txt"
+    }
+  }
+}
 ```
